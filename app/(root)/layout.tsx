@@ -1,7 +1,6 @@
 import Sidebar from "@/components/ui/Sidebar";
 import Image from "next/image";
 import MobileNav from "@/components/ui/MobileNav";
-import { log } from "console";
 
 export default function RootLayout({
   children,
@@ -15,9 +14,9 @@ export default function RootLayout({
         <Sidebar user={loggedIn}/>
         <div className="flex size-full flex-col">
           <div className="root-layout">
-            <Image  src="/icons/logo.svg" width={30} height={30} alt="Horizon Logo"/>
+            <Image src="/icons/logo.svg" width={30} height={30} alt="Horizon Logo" />
             <div>
-              <MobileNav user={log}/>
+              <MobileNav user={loggedIn} />
             </div>
           </div>
           {children}
