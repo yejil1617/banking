@@ -5,6 +5,7 @@ import Image from "next/image";
 import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import Footer from "./Footer";
 
 const Sidebar = ({ user }: SiderbarProps) => {
   const pathname = usePathname();
@@ -21,7 +22,6 @@ const Sidebar = ({ user }: SiderbarProps) => {
           />
           <h1 className="sidebar-logo">Horizon</h1>
         </Link>
-
         {sidebarLinks.map((link) => {
           const isActive =
             pathname === link.route || pathname.startsWith(`${link.route}/`);
@@ -36,16 +36,18 @@ const Sidebar = ({ user }: SiderbarProps) => {
                   src={link.imgURL}
                   alt={link.label}
                   fill
-                  className={cn({'brightness-[2] invert-0': isActive})}
+                  className={cn({ "brightness-[2] invert-0": isActive })}
                 />
               </div>
-              <p className={cn('sidebar-label', {'!text-white': isActive})}>{link.label}</p>
+              <p className={cn("sidebar-label", { "!text-white": isActive })}>
+                {link.label}
+              </p>
             </Link>
           );
         })}
         USER
       </nav>
-      FOOTER
+      <Footer user={user} />
     </section>
   );
 };
