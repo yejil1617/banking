@@ -14,7 +14,7 @@ import { authformSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { getLoggedInUser, signIn, signUp } from "@/lib/actions/user.actions";
+import { signIn, signUp } from "@/lib/actions/user.actions";
 
 const AuthForm = ({ type }: { type: string }) => {
   const router = useRouter();
@@ -36,6 +36,7 @@ const AuthForm = ({ type }: { type: string }) => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log("submit", data);
     setIsLoading(true);
     try {
       // sign up iwht Appwrite and create plaid token
@@ -45,10 +46,12 @@ const AuthForm = ({ type }: { type: string }) => {
         setUser(newUser);
       }
       if (type === "sign-in") {
+        console.log("yoyoyoyo");
         const response = await signIn({
           email: data.email,
           password: data.password,
-        })
+        });
+        console.log("auth form: ", response);
         if (response) {
           router.push("/");
         }
@@ -117,7 +120,7 @@ const AuthForm = ({ type }: { type: string }) => {
                     control={form.control}
                     name="city"
                     label="City"
-                    placeholder="Enter your cit"
+                    placeholder="Enter your city"
                   />
                   <div className="flex gap-4">
                     <CustomInput
